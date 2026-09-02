@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>喵星指挥部 · 猫咪大战争旗舰店</title>
+  <style>
+    /* ===== 全局重置 & 配色 ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, system-ui, sans-serif; }
+    :root {
+      --orange: #FF6B00;
+      --orange-light: #FF8C33;
+      --blue: #0066FF;
+      --blue-light: #3385FF;
+      --dark: #1A1A2E;
+      --gray-bg: #F5F7FA;
+      --card-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+    body { background: var(--gray-bg); color: var(--dark); padding: 20px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    /* ===== 头部 ===== */
+    .header {
+      background: linear-gradient(135deg, var(--orange), var(--blue));
+      padding: 30px 25px;
+      border-radius: 28px;
+      color: white;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 25px rgba(255, 107, 0, 0.3);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 { font-size: 2.2rem; letter-spacing: 1px; }
+    .header h1 small { font-size: 1rem; opacity: 0.9; display: block; }
+    .header-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      padding: 10px 22px;
+      border: none;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-white { background: white; color: var(--dark); }
+    .btn-white:hover { transform: scale(1.03); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .btn-wa { background: #25D366; color: white; }
+    .btn-wa:hover { background: #1DA851; transform: scale(1.03); }
+
+    /* ===== 信任标识 ===== */
+    .trust-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px 40px;
+      background: white;
+      padding: 15px 25px;
+      border-radius: 60px;
+      margin-bottom: 30px;
+      box-shadow: var(--card-shadow);
+    }
+    .trust-bar span { font-weight: 600; color: var(--dark); }
+    .trust-bar i { color: var(--orange); margin-right: 6px; }
+
+    /* ===== 商品分类标题 ===== */
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin: 40px 0 20px;
+      padding-left: 15px;
+      border-left: 8px solid var(--orange);
+    }
+    .section-title .highlight { color: var(--blue); }
+
+    /* ===== 商品网格 ===== */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    /* ===== 商品卡片 ===== */
+    .product-card {
+      background: white;
+      border-radius: 24px;
+      padding: 24px 20px 20px;
+      box-shadow: var(--card-shadow);
+      transition: all 0.25s ease;
+      border: 2px solid transparent;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--orange-light);
+      box-shadow: 0 15px 35px rgba(255, 107, 0, 0.12);
+    }
+    .product-card .badge-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 30px;
+      letter-spacing: 0.5px;
+      background: #eee;
+      color: #333;
+    }
+    .badge-orange { background: var(--orange); color: white; }
+    .badge-blue { background: var(--blue); color: white; }
+    .badge-green { background: #25D366; color: white; }
+
+    .product-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+      color: var(--dark);
+    }
+    .product-card .price {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--orange);
+      margin: 8px 0 12px;
+    }
+    .product-card .price small { font-size: 1rem; font-weight: 400; color: #777; }
+    .product-card ul {
+      list-style: none;
+      margin: 10px 0 18px;
+      flex-grow: 1;
+    }
+    .product-card ul li {
+      padding: 5px 0;
+      font-size: 0.9rem;
+      border-bottom: 1px dashed #f0f0f0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .product-card ul li::before {
+      content: "▶";
+      color: var(--blue);
+      font-size: 0.6rem;
+    }
+    .product-card .btn-wa {
+      width: 100%;
+      justify-content: center;
+      padding: 12px;
+      font-size: 1rem;
+      margin-top: 4px;
+    }
+
+    /* ===== 服务专区（小卡片） ===== */
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    .service-card {
+      background: white;
+      border-radius: 18px;
+      padding: 18px 16px;
+      box-shadow: var(--card-shadow);
+      text-align: center;
+      border-left: 6px solid var(--blue);
+      transition: 0.2s;
+    }
+    .service-card:hover { transform: scale(1.02); }
+    .service-card .price { color: var(--orange); font-weight: 800; font-size: 1.2rem; }
+    .service-card .btn-wa { width: 100%; justify-content: center; padding: 8px; font-size: 0.85rem; margin-top: 10px; }
+
+    /* ===== 页脚 ===== */
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 30px 0 20px;
+      border-top: 2px solid #e0e0e0;
+      color: #666;
+      font-size: 0.9rem;
+    }
+    .footer a { color: var(--blue); text-decoration: none; }
+
+    /* ===== 响应式 ===== */
+    @media (max-width: 600px) {
+      .header { flex-direction: column; align-items: flex-start; gap: 15px; }
+      .header h1 { font-size: 1.8rem; }
+      .trust-bar { border-radius: 30px; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ====== 头部 ====== -->
+  <header class="header">
+    <div>
+      <h1>🐱 喵星指挥部 <small>猫咪大战争 · 旗舰专营</small></h1>
+    </div>
+    <div class="header-actions">
+      <a href="https://www.tiktok.com/@battlecatstore/video/7467759096188456199" target="_blank" class="btn btn-white">📺 转移教学</a>
+      <a href="https://wa.me/601172833280?text=您好！我想咨询猫咪大战争商品" target="_blank" class="btn btn-wa">💬 联系客服</a>
+    </div>
+  </header>
+
+  <!-- ====== 信任标识 ====== -->
+  <div class="trust-bar">
+    <span>🔒 专业技术 · 防封安全</span>
+    <span>📱 iOS / Android 全支持</span>
+    <span>♻️ 免费更新售后</span>
+    <span>⚡ 极速安排发货</span>
+  </div>
+
+  <!-- ====== 账号专区 ====== -->
+  <h2 class="section-title">🎯 精选 <span class="highlight">账号</span> 专场</h2>
+  <div class="product-grid" id="accountProducts">
+    <!-- 商品由 JS 动态渲染，便于维护 -->
+  </div>
+
+  <!-- ====== 服务专区 ====== -->
+  <h2 class="section-title">🛠️ 专项 <span class="highlight">服务</span> & 资源</h2>
+  <div class="service-grid" id="serviceProducts">
+    <!-- 由 JS 动态渲染 -->
+  </div>
+
+  <!-- ====== 页脚 ====== -->
+  <div class="footer">
+    <p>🐾 本店所有商品均提供售后服务与安全保障 | 全平台账号处理</p>
+    <p>📞 <a href="https://wa.me/601172833280">WhatsApp: 011-7283 3280</a> &nbsp;|&nbsp; 
+       <a href="https://www.tiktok.com/@battlecatstore" target="_blank">TikTok @battlecatstore</a></p>
+    <p style="margin-top:10px; font-size:0.8rem; opacity:0.7;">* 转移教学视频请复制链接至浏览器打开：https://www.tiktok.com/@battlecatstore/video/7467759096188456199</p>
+  </div>
+</div>
+
+<script>
+  // ============================================================
+  // 1. 数据：根据您最初的两张商品图整理
+  // ============================================================
+  const accountData = [
+    { name: '普通初始号 ★★★☆☆', price: 'RM 10', tags: ['新手入门', '超值'], 
+      features: ['XP: 1亿', '道具/银券/福券', '二选一：全图鉴 或 初始小猫'], 
+      badge: 'badge-green' },
+    { name: '标准初始号 ★★★★☆', price: 'RM 25', tags: ['进阶', '自选'],
+      features: ['XP: 1亿', '道具/统率各500', '二选一：全图鉴 或 自选单系列'], 
+      badge: 'badge-blue' },
+    { name: '黄金精英号 ★☆☆☆☆', price: 'RM 30', tags: ['全猫满级', '全宝箱'],
+      features: ['全猫解锁+满级', '全最终四阶', '宇宙宝箱/银券4星', '加码多多MAX'], 
+      badge: 'badge-orange' },
+    { name: '豪华初始号 ★★★★★', price: 'RM 35', tags: ['资源丰富', '自选8猫'],
+      features: ['XP: 1亿', '道具800+统率500', '二选一：全图库/自选系列', '三选一进度/自选猫'], 
+      badge: 'badge-blue' },
+    { name: '顶配初始号 ★★★★★', price: 'RM 45', tags: ['顶配', '三选一'],
+      features: ['资源各1200', '银券1000', '三选一：全猫/全合作/全超激', '自选进度+包后续'], 
+      badge: 'badge-orange' },
+    { name: '🏆 猫神至尊号 ★★★★★', price: 'RM 85', tags: ['终极完美', '永久更新'],
+      features: ['全猫满级四阶', '全本能/超本能解锁', '全宝箱+真传4星', '永久免费后续版本更新'], 
+      badge: 'badge-orange', hot: true },
+  ];
+
+  const serviceData = [
+    { name: '单猫解锁 / 进化 / 满等', price: 'RM 2.5', desc: '任意单猫三阶/四阶/满等' },
+    { name: '稀有/系列全解锁', price: 'RM 10', desc: '稀有度全解 或 单系列(含联动)' },
+    { name: '主线全章通关', price: 'RM 12', desc: '+RM10 加购全宝物' },
+    { name: '传说/真传关卡', price: 'RM 10', desc: '旧/真传说全通，+RM5全星级' },
+    { name: '不死/魔界全通', price: 'RM 15', desc: '不死关卡 或 魔界篇挑战' },
+    { name: '城堡炮塔&饰品MAX', price: 'RM 15', desc: '含后续版本更新内容' },
+    { name: 'S级本能珠 (全属性)', price: 'RM 15', desc: '各属性10个' },
+    { name: '探险/神社/彩帽', price: 'RM 10', desc: '单项MAX (探险/神社/彩帽10名)' },
+    { name: '基础资源 (每项)', price: 'RM 10', desc: '统率旗/道具/银券/猫罐头/XP等' },
+    { name: '稀有资源 (每项)', price: 'RM 15', desc: '白金券 / 传说卷' },
+  ];
+
+  // ============================================================
+  // 2. 渲染函数
+  // ============================================================
+  function renderAccounts() {
+    const container = document.getElementById('accountProducts');
+    container.innerHTML = accountData.map(item => {
+      const badgeClass = item.badge || 'badge-blue';
+      const hotTag = item.hot ? '<span class="badge badge-orange">🔥 热销</span>' : '';
+      const tagsHtml = item.tags.map(t => `<span class="badge ${badgeClass}">${t}</span>`).join(' ');
+      const featuresHtml = item.features.map(f => `<li>${f}</li>`).join('');
+
+      return `
+        <div class="product-card">
+          <div class="badge-group">
+            ${hotTag}
+            ${tagsHtml}
+            <span class="badge badge-green">🛡️ 安全担保</span>
+          </div>
+          <h3>${item.name}</h3>
+          <div class="price">${item.price} <small>起</small></div>
+          <ul>${featuresHtml}</ul>
+          <button class="btn btn-wa" onclick="askProduct('${item.name} ${item.price}')">
+            💬 立即咨询
+          </button>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function renderServices() {
+    const container = document.getElementById('serviceProducts');
+    container.innerHTML = serviceData.map(item => `
+      <div class="service-card">
+        <div style="font-weight:700; margin-bottom:4px;">${item.name}</div>
+        <div class="price">${item.price}</div>
+        <div style="font-size:0.8rem; color:#666; margin:6px 0;">${item.desc}</div>
+        <button class="btn btn-wa" onclick="askProduct('${item.name} ${item.price}')">
+          💬 咨询
+        </button>
+      </div>
+    `).join('');
+  }
+
+  // ============================================================
+  // 3. 全局咨询函数 (跳转 WhatsApp)
+  // ============================================================
+  function askProduct(productName) {
+    const phone = '601172833280';  // 马来西亚号码
+    const message = `您好！我想咨询【${productName}】，请提供更多详情。`;
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  }
+
+  // ============================================================
+  // 4. 启动渲染
+  // ============================================================
+  renderAccounts();
+  renderServices();
+</script>
+</body>
+</html>
