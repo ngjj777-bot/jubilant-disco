@@ -16,7 +16,6 @@
     body { background: var(--gray-bg); color: var(--dark); padding: 15px; }
     .container { max-width: 1000px; margin: 0 auto; }
 
-    /* ===== 头部 ===== */
     .header {
       background: linear-gradient(135deg, var(--orange), var(--blue));
       padding: 20px 20px;
@@ -51,12 +50,16 @@
     .btn-wa:hover { background: #1DA851; }
     .btn-orange { background: var(--orange); color: white; }
     .btn-orange:hover { background: #e05f00; }
+    .btn-cart { background: #FFD700; color: #333; position: relative; }
+    .btn-cart:hover { background: #f0c800; }
+    .btn-cart .cart-count {
+      background: #E53935; color: white; border-radius: 50%;
+      font-size: 0.65rem; padding: 1px 6px; margin-left: 4px;
+    }
 
-    /* ===== 页面切换 ===== */
     .page { display: none; }
     .page.active { display: block; }
 
-    /* ===== 信任标识 ===== */
     .trust-bar {
       display: flex;
       flex-wrap: wrap;
@@ -71,7 +74,6 @@
       font-weight: 600;
     }
 
-    /* ===== 注册横幅 ===== */
     .register-banner {
       background: linear-gradient(135deg, #FFF8E1, #FFECB3);
       border-radius: 20px;
@@ -90,7 +92,6 @@
     .register-banner .btn-gold:hover { background: #f0c800; }
     .register-banner .hint { font-size: 0.75rem; color: #888; margin-top: 8px; }
 
-    /* ===== 商品卡片 ===== */
     .section-title {
       font-size: 1.5rem;
       font-weight: 800;
@@ -150,7 +151,6 @@
     .product-card .desc strong { color: var(--dark); }
     .product-card .btn-wa { width: 100%; justify-content: center; padding: 10px; font-size: 0.95rem; margin-top: 6px; }
 
-    /* ===== 礼包排行榜 ===== */
     .rank-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -209,7 +209,6 @@
     .rank-summary .row { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 30px; margin-top: 8px; }
     .rank-summary .row span { font-weight: 600; font-size: 0.9rem; }
 
-    /* ===== 服务网格 ===== */
     .service-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -226,13 +225,264 @@
       box-shadow: var(--card-shadow);
       text-align: center;
       border-bottom: 4px solid var(--blue);
+      cursor: pointer;
+      transition: 0.2s;
     }
+    .service-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,102,255,0.15); }
     .service-card .price { color: var(--orange); font-weight: 800; font-size: 1.1rem; }
     .service-card .btn-wa { width: 100%; justify-content: center; padding: 6px; font-size: 0.8rem; margin-top: 8px; }
 
-    /* ================================================================
-       攻略站页面样式
-       ================================================================ */
+    .shop-section {
+      background: white;
+      border-radius: 24px;
+      padding: 20px 18px;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 20px;
+      border-top: 5px solid var(--orange);
+    }
+    .shop-section.blue { border-top-color: var(--blue); }
+    .shop-section.purple { border-top-color: #9C27B0; }
+    .shop-section.green { border-top-color: #25D366; }
+
+    .shop-section .sec-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .shop-section .sec-desc {
+      font-size: 0.8rem;
+      color: #888;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    .item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: #f8f9fa;
+      margin-bottom: 8px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .item-row .item-info { flex: 1; min-width: 150px; }
+    .item-row .item-name { font-weight: 700; font-size: 0.95rem; }
+    .item-row .item-amount {
+      font-size: 0.8rem;
+      color: var(--orange);
+      font-weight: 700;
+      background: #fff3e8;
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 30px;
+      margin-top: 2px;
+    }
+    .item-row .item-price {
+      font-size: 0.85rem;
+      color: #666;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .item-row .item-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+        .qty-control {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border: 2px solid #ddd;
+      border-radius: 30px;
+      overflow: hidden;
+      background: white;
+    }
+    .qty-control button {
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: #f0f0f0;
+      font-size: 1.1rem;
+      font-weight: 800;
+      cursor: pointer;
+      color: var(--dark);
+      transition: 0.15s;
+    }
+    .qty-control button:hover { background: var(--orange); color: white; }
+    .qty-control .qty-num {
+      width: 36px;
+      text-align: center;
+      font-weight: 800;
+      font-size: 0.95rem;
+      border: none;
+      background: white;
+      color: var(--dark);
+    }
+    .qty-control .qty-num:focus { outline: 2px solid var(--orange); }
+
+    .btn-add-cart {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      cursor: pointer;
+      background: var(--orange);
+      color: white;
+      transition: 0.2s;
+      white-space: nowrap;
+    }
+    .btn-add-cart:hover { background: #e05f00; transform: scale(1.03); }
+    .btn-add-cart.blue { background: var(--blue); }
+    .btn-add-cart.blue:hover { background: #0050cc; }
+    .btn-add-cart.purple { background: #9C27B0; }
+    .btn-add-cart.purple:hover { background: #7B1FA2; }
+
+    .cart-panel {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      border-radius: 24px 24px 0 0;
+      box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
+      padding: 20px 18px;
+      z-index: 999;
+      max-height: 80vh;
+      overflow-y: auto;
+      border-top: 5px solid var(--orange);
+    }
+    .cart-panel.active { display: block; }
+    .cart-panel .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .cart-panel .cart-header h3 { font-size: 1.2rem; color: var(--dark); }
+    .cart-panel .cart-header .close-cart {
+      background: #f0f0f0;
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      font-weight: 700;
+      color: #555;
+    }
+    .cart-panel .cart-header .close-cart:hover { background: #ddd; }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: #f8f9fa;
+      margin-bottom: 8px;
+      gap: 10px;
+    }
+    .cart-item .ci-name { font-weight: 700; font-size: 0.9rem; flex: 1; }
+    .cart-item .ci-qty { font-size: 0.8rem; color: #666; }
+    .cart-item .ci-price { font-weight: 800; color: var(--orange); font-size: 0.9rem; white-space: nowrap; }
+    .cart-item .ci-remove {
+      background: #ffebee;
+      border: none;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      color: #E53935;
+      font-weight: 700;
+    }
+    .cart-item .ci-remove:hover { background: #ffcdd2; }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 16px;
+      background: #fff3e8;
+      border-radius: 14px;
+      margin: 12px 0;
+      border: 2px dashed var(--orange);
+    }
+    .cart-total .ct-label { font-weight: 800; font-size: 1rem; }
+    .cart-total .ct-price { font-weight: 900; font-size: 1.4rem; color: var(--orange); }
+
+    .cart-empty {
+      text-align: center;
+      padding: 30px 0;
+      color: #999;
+      font-size: 0.95rem;
+    }
+
+    .btn-checkout {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 16px;
+      font-weight: 800;
+      font-size: 1.05rem;
+      cursor: pointer;
+      background: #25D366;
+      color: white;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn-checkout:hover { background: #1DA851; transform: scale(1.01); }
+    .btn-checkout:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+
+    .floating-cart {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--orange);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 22px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(255,107,0,0.4);
+      z-index: 998;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: 0.2s;
+    }
+    .floating-cart:hover { background: #e05f00; transform: scale(1.05); }
+    .floating-cart .fc-count {
+      background: white;
+      color: var(--orange);
+      border-radius: 50%;
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      font-weight: 900;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 997;
+    }
+    .overlay.active { display: block; }
+
     .guide-header {
       background: linear-gradient(135deg, #1A1A2E, #16213E);
       border-radius: 24px;
@@ -246,12 +496,7 @@
     .guide-header h2 span { color: var(--orange); }
     .guide-header .sub { color: #aaa; margin-top: 8px; font-size: 0.95rem; }
 
-    .article-tabs {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
+    .article-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
     .article-tabs .art-btn {
       padding: 8px 18px;
       border: 2px solid #ddd;
@@ -265,11 +510,7 @@
       flex: 1 1 auto;
       min-width: 100px;
     }
-    .article-tabs .art-btn.active {
-      border-color: var(--orange);
-      background: var(--orange);
-      color: white;
-    }
+    .article-tabs .art-btn.active { border-color: var(--orange); background: var(--orange); color: white; }
     .article-tabs .art-btn:hover:not(.active) { border-color: var(--orange); }
 
     .article-content { display: none; }
@@ -346,18 +587,8 @@
     .guide-body .service-reminder .price { font-size: 2rem; font-weight: 800; color: #FFD700; }
     .guide-body .service-reminder .btn { margin-top: 12px; }
 
-    /* ================================================================
-       资源导航页（整合在攻略站内）
-       ================================================================ */
-    .resource-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-    @media (min-width: 600px) {
-      .resource-grid { grid-template-columns: 1fr 1fr; }
-    }
+    .resource-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 20px; }
+    @media (min-width: 600px) { .resource-grid { grid-template-columns: 1fr 1fr; } }
     .resource-card {
       background: white;
       border-radius: 20px;
@@ -406,7 +637,6 @@
     .tips-box ul { padding-left: 20px; line-height: 2; color: #444; }
     .tips-box ul li strong { color: var(--orange); }
 
-    /* ===== 原始图片 ===== */
     .original-images {
       margin: 35px 0 20px;
       background: white;
@@ -423,47 +653,42 @@
     .original-images .img-card img { max-width: 100%; height: auto; border-radius: 10px; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
     .original-images .img-card .img-label { margin-top: 8px; font-size: 0.75rem; color: #888; background: #f0f0f0; padding: 4px 10px; border-radius: 30px; display: inline-block; }
 
-    /* ===== 页脚 ===== */
     .footer {
       text-align: center;
       margin-top: 25px;
-      padding: 20px 0 10px;
+      padding: 20px 0 60px;
       border-top: 2px solid #e0e0e0;
       color: #666;
       font-size: 0.8rem;
     }
     .footer a { color: var(--blue); text-decoration: none; }
 
-    /* ===== 导航标签 ===== */
     .nav-tabs {
       display: flex;
       gap: 6px;
       background: rgba(255,255,255,0.2);
       border-radius: 50px;
       padding: 4px;
+      flex-wrap: wrap;
     }
     .nav-tabs .tab-btn {
-      padding: 6px 16px;
+      padding: 6px 14px;
       border: none;
       border-radius: 50px;
       font-weight: 700;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       cursor: pointer;
       transition: 0.2s;
       background: transparent;
       color: rgba(255,255,255,0.7);
     }
-    .nav-tabs .tab-btn.active {
-      background: white;
-      color: var(--dark);
-    }
+    .nav-tabs .tab-btn.active { background: white; color: var(--dark); }
     .nav-tabs .tab-btn:hover:not(.active) { color: white; }
   </style>
 </head>
 <body>
 <div class="container">
 
-  <!-- ===== 头部 ===== -->
   <header class="header">
     <div>
       <h1>🐱 喵星指挥部 <small>猫咪大战争 · 旗舰专营</small></h1>
@@ -474,13 +699,11 @@
         <button class="tab-btn" onclick="switchPage('guide')">📖 攻略站</button>
         <button class="tab-btn" onclick="switchPage('resource')">📚 资源</button>
       </div>
+      <button class="btn btn-cart" onclick="openCart()">🛒 购物车 <span class="cart-count" id="headerCartCount">0</span></button>
       <a href="https://wa.me/601172833280?text=您好！我想咨询猫咪大战争商品" target="_blank" class="btn btn-wa" style="padding:6px 14px; font-size:0.8rem;">💬 客服</a>
     </div>
   </header>
 
-  <!-- ================================================================
-       页面1：商店
-       ================================================================ -->
   <div class="page active" id="page-shop">
 
     <div class="trust-bar">
@@ -501,7 +724,7 @@
     <h2 class="section-title">🎯 精选 <span class="highlight">账号</span> 专场</h2>
     <div class="product-grid" id="accountProducts"></div>
 
-    <h2 class="section-title">🏆 礼包 <span class="highlight">排行榜</span> <span class="badge-count">按性价比排序</span></h2>
+    <h2 class="section-title">🏆 礼包 <span class="highlight">排行榜</span></h2>
     <div class="rank-summary">
       <strong>💡 一句话原则：</strong>
       <div class="row">
@@ -512,12 +735,41 @@
     </div>
     <div class="rank-grid" id="rankProducts"></div>
 
-    <h2 class="section-title">🛠️ 专项 <span class="highlight">服务</span> & 资源</h2>
+    <h2 class="section-title">🛒 资源 <span class="highlight">道具</span> <span class="badge-count">全部序号交付</span></h2>
+    <div style="background:#fff3e8; border-radius:14px; padding:12px 16px; margin-bottom:16px; font-size:0.85rem; color:#555; border:1px dashed var(--orange);">
+      💡 可买多份的用 <strong>＋ / －</strong> 调整数量，最后按底部 <strong>「加入购物车」</strong> 统一结算。
+    </div>
+
+    <div class="shop-section">
+      <div class="sec-title">💰 资源点数</div>
+      <div class="sec-desc">全部序号交付 · 可买多份</div>
+      <div id="section-points"></div>
+    </div>
+
+    <div class="shop-section blue">
+      <div class="sec-title">🎫 转蛋票券</div>
+      <div class="sec-desc">全部序号交付 · 可买多份</div>
+      <div id="section-tickets"></div>
+    </div>
+
+    <div class="shop-section green">
+      <div class="sec-title">🧪 道具・素材</div>
+      <div class="sec-desc">全部序号交付 · 可买多份</div>
+      <div id="section-materials"></div>
+    </div>
+
+    <div class="shop-section purple">
+      <div class="sec-title">💎 特殊资源</div>
+      <div class="sec-desc">全部序号交付 · 可买多份</div>
+      <div id="section-special"></div>
+    </div>
+
+    <h2 class="section-title">🛠️ 专项 <span class="highlight">服务</span></h2>
     <div class="service-grid" id="serviceProducts"></div>
 
     <div class="original-images">
       <h3>📷 官方商品原图</h3>
-      <div class="sub-info">点击图片可放大 · 点击咨询按钮即可下单</div>
+      <div class="sub-info">点击图片可放大</div>
       <div class="img-grid">
         <div class="img-card">
           <img src="Screenshot_2026_0902_170726.png" alt="账号专场" onclick="window.open(this.src,'_blank')" style="cursor:pointer;">
@@ -531,214 +783,201 @@
     </div>
   </div>
 
-  <!-- ================================================================
-       页面2：攻略站
-       ================================================================ -->
   <div class="page" id="page-guide">
-
     <div class="guide-header">
       <h2>🐱 貓咪大戰爭 <span>攻略站</span></h2>
       <div class="sub">登入／註冊 · 立即註冊・免費送 <strong style="color:#FFD700;">150 貓罐頭</strong> ＋ <strong style="color:#FFD700;">500 萬經驗</strong> 雙重好禮！</div>
       <div style="margin-top:10px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
         <a href="#" class="btn btn-orange" style="font-size:1rem; padding:10px 30px;" onclick="event.preventDefault(); goToRegister();">🚀 前往註冊 ＞＞＞</a>
       </div>
-      <div style="margin-top:8px; font-size:0.8rem; color:#888;">👉 用外部瀏覽器開啟，登入更順、不用重打帳密</div>
     </div>
 
     <div class="article-tabs">
-      <button class="art-btn active" onclick="switchArticle('facility')">🏰 設施全解析</button>
-      <button class="art-btn" onclick="switchArticle('rank')">⭐ 必練角色排行</button>
-      <button class="art-btn" onclick="switchArticle('rarity')">🎴 稀有度全解析</button>
+  <button class="art-btn active" onclick="switchArticle('facility')">🏰 設施全解析</button>
+  <button class="art-btn" onclick="switchArticle('rank')">⭐ 必練角色排行</button>
+  <button class="art-btn" onclick="switchArticle('rarity')">🎴 稀有度全解析</button>
+  <button class="art-btn" onclick="switchArticle('transfer')">🔄 帳號轉移教學</button>
     </div>
 
-    <!-- 文章1 -->
     <div class="article-content active" id="article-facility">
       <div class="guide-body">
-        <div style="display:flex; gap:15px; flex-wrap:wrap; font-size:0.85rem; color:#888; border-bottom:1px solid #eee; padding-bottom:12px; margin-bottom:20px;">
-          <span>📅 2026-07-27（1 個月前）</span>
-          <span>📖 閱讀約 8 分鐘</span>
-          <span>🏷️ 機制</span>
-        </div>
         <h3>🏰 貓咪設施全解析 — 十項基地強化，決定你打得動打不動</h3>
-        <p>很多人只顧著練貓，卻忘了「基地設施」才是整支隊伍的地基。錢賺得快不快、貓出得順不順、砲夠不夠痛、經驗拿得多不多，全看這十項強到第幾級。搞懂它們，卡關往往不是缺貓，是設施沒跟上。</p>
-        <h4>設施是什麼？跟練貓有什麼不一樣</h4>
-        <p>基地設施是一組全域強化，效果套用在你整場、每一隻貓身上——不是單一角色的等級。貓再強，如果錢包太小、賺錢太慢、砲太弱，照樣打不動後期關卡。設施就是那個「看不見但一直在作用」的底盤。遊戲裡總共有十項設施。</p>
-        <div class="highlight-box"><strong>💡 一句話原則：</strong> 前期優先衝「賺錢」相關設施，中後期補「基地血量與砲」。錢是所有戰術的燃料，賺得快才出得起貓。</div>
+        <p>很多人只顧著練貓，卻忘了「基地設施」才是整支隊伍的地基。錢賺得快不快、貓出得順不順、砲夠不夠痛、經驗拿得多不多，全看這十項強到第幾級。</p>
+        <div class="highlight-box"><strong>💡 一句話原則：</strong> 前期優先衝「賺錢」相關設施，中後期補「基地血量與砲」。</div>
         <h4>等級上限：20 +10 是怎麼回事</h4>
-        <p>每一項設施的等級寫成「20 +10」：前面的 1～20 級用「經驗值」升級，這是主要、也最花時間的部分；後面的 +1～+10 級不能用經驗值，要靠「銀票（普通轉蛋）」抽——在普通轉蛋裡除了貓，還會抽到「基地升級 +1」的加成，一路可以疊到 +10。所以一項設施真正的滿等是 30 級（20＋10）。</p>
-        <div class="tip-box"><strong>⚠️ 唯一例外是貓咪砲射程：</strong> 它只能升到 10 級，而且不吃銀票加成，沒有 +10。其餘九項都是 20＋10。</div>
-        <h4>貓咪砲三兄弟</h4>
-        <div style="display:grid; grid-template-columns:1fr; gap:10px; margin:12px 0;">
-          <div style="background:#f8f9fa; border-radius:12px; padding:12px 14px; border-bottom:3px solid var(--orange);"><strong>🔫 貓咪砲攻擊力</strong><br><span style="font-size:0.9rem; color:#555;">提升基地砲的傷害，用來清場、打斷敵人。注意：升攻擊力會同時拉長砲的充電時間，所以通常要搭配「充電」一起升。</span><br><span style="display:inline-block; font-size:0.65rem; font-weight:700; padding:2px 10px; border-radius:30px; background:var(--orange); color:white; margin-top:4px;">攻擊</span></div>
-          <div style="background:#f8f9fa; border-radius:12px; padding:12px 14px; border-bottom:3px solid var(--blue);"><strong>📏 貓咪砲射程</strong><br><span style="font-size:0.9rem; color:#555;">加大砲的攻擊範圍，能打到更遠、更多的敵人。上限 10 級（無 +10）。</span><br><span style="display:inline-block; font-size:0.65rem; font-weight:700; padding:2px 10px; border-radius:30px; background:var(--blue); color:white; margin-top:4px;">範圍</span></div>
-          <div style="background:#f8f9fa; border-radius:12px; padding:12px 14px; border-bottom:3px solid #25D366;"><strong>⚡ 貓咪砲充電</strong><br><span style="font-size:0.9rem; color:#555;">縮短砲的充電時間，砲能更頻繁地放，剛好抵銷攻擊力帶來的充電變慢。</span><br><span style="display:inline-block; font-size:0.65rem; font-weight:700; padding:2px 10px; border-radius:30px; background:#25D366; color:white; margin-top:4px;">冷卻</span></div>
-        </div>
-        <h4>賺錢三本柱</h4>
-        <div style="display:grid; grid-template-columns:1fr; gap:10px; margin:12px 0;">
-          <div style="background:#f8f9fa; border-radius:12px; padding:12px 14px; border-bottom:3px solid #FFD700;"><strong>💼 工作狂貓的工作效率</strong><br><span style="font-size:0.9rem; color:#555;">加快金錢自動增加的速度，開場就能更快出貓鋪場。最該優先點的一項。</span><br><span style="display:inline-block; font-size:0.65rem; font-weight:700; padding:2px 10px; border-radius:30px; background:#FFD700; color:#333; margin-top:4px;">最優先</span></div>
-          <div style="background:#f8f9fa; border-radius:12px; padding:12px 14px; border-bottom:3px solid #FFD700;"><strong>👛 工作狂貓的錢包</strong><br><span style="font-size:0.9rem; color:#555;">提升金錢的儲存上限，才存得起、出得起貴的超激稀有主力。</span><br><span style="display:inline-block; font-size:0.65rem; font-weight:700; padding:2px 10px; border-radius:30px; background:#FFD700; color:#333; margin-top:4px;">最優先</span></div>
-          <div style="background:#f8f9fa; border-radius:12px; padding:12px 14px; border-bottom:3px solid #FF8C00;"><strong>💰 會計能力</strong><br><span style="font-size:0.9rem; color:#555;">提升擊倒敵人掉落的金錢（每級 +5%），滾錢更快。</span><br><span style="display:inline-block; font-size:0.65rem; font-weight:700; padding:2px 10px; border-radius:30px; background:#FF8C00; color:white; margin-top:4px;">賺錢</span></div>
-        </div>
+        <p>每一項設施的等級寫成「20 +10」：前面的 1～20 級用「經驗值」升級；後面的 +1～+10 級要靠「銀票（普通轉蛋）」抽，一路可以疊到 +10。所以一項設施真正的滿等是 30 級（20＋10）。</p>
+        <div class="tip-box"><strong>⚠️ 唯一例外是貓咪砲射程：</strong> 它只能升到 10 級，而且不吃銀票加成，沒有 +10。</div>
         <div class="service-reminder">
           <p style="font-size:0.9rem; opacity:0.8;">💠 十項設施一次全部升到 20＋10 滿等</p>
           <p style="margin-top:8px;">只要 <span class="price">RM 10</span></p>
-          <a href="https://wa.me/601172833280?text=您好！我想咨询【猫咪设施科技 RM10】" target="_blank" class="btn btn-wa" style="font-size:1rem; padding:10px 30px;">💬 立即諮詢</a>
+          <a href="https://wa.me/601172833280?text=您好！我想咨询【猫咪设施科技 RM10】" target="_blank" class="btn btn-wa">💬 立即諮詢</a>
         </div>
       </div>
     </div>
 
-    <!-- 文章2 -->
     <div class="article-content" id="article-rank">
       <div class="guide-body">
-        <div style="display:flex; gap:15px; flex-wrap:wrap; font-size:0.85rem; color:#888; border-bottom:1px solid #eee; padding-bottom:12px; margin-bottom:20px;">
-          <span>📅 2026-09-08（今日）</span>
-          <span>📖 閱讀約 6 分鐘</span>
-          <span>🏷️ 養成</span>
-        </div>
         <h3>⭐ 必練角色排行 — 別亂練，先把這幾種練起來最有感</h3>
         <p>貓咪大戰爭有八百多隻貓，但真正該「優先」練的其實不多。練錯順序＝關卡照樣卡、資源還白燒。</p>
-        <div class="highlight-box"><strong>💡 一句話準則：</strong> 能用在多數關卡的泛用角，永遠比專剋角優先。鋪得起場、擋得住前排的「骨幹型」先練。</div>
-        <h4>第一級：免費就能拿，每個帳號都該練滿</h4>
-        <p>大狂亂系列（狂亂關卡掉落）與基本貓的真形態，是整個遊戲的地基。</p>
-        <div class="tip-box"><strong>⚠️ 大狂亂系列要先通關對應的「狂亂關卡」才拿得到，</strong> 很多人卡在這一步，等於連地基都缺。</div>
-        <h4>第二級：主力超激稀有（抽到就先練）</h4>
-        <p>萬用型優先 → 攻城/範圍型次之 → 純單屬性剋制型最後。</p>
+        <div class="highlight-box"><strong>💡 一句話準則：</strong> 能用在多數關卡的泛用角，永遠比專剋角優先。</div>
         <div class="service-reminder">
           <p style="font-size:1rem; font-weight:700;">代練單隻貓咪</p>
           <p style="font-size:0.9rem; opacity:0.8;">800多隻任選，指定升到真形態（三階／四階）</p>
-          <a href="https://wa.me/601172833280?text=您好！我想咨询【代练猫咪】" target="_blank" class="btn btn-wa" style="font-size:1rem; padding:10px 30px;">💬 立即諮詢</a>
+          <a href="https://wa.me/601172833280?text=您好！我想咨询【代练猫咪】" target="_blank" class="btn btn-wa">💬 立即諮詢</a>
         </div>
       </div>
     </div>
 
-    <!-- 文章3 -->
     <div class="article-content" id="article-rarity">
       <div class="guide-body">
-        <div style="display:flex; gap:15px; flex-wrap:wrap; font-size:0.85rem; color:#888; border-bottom:1px solid #eee; padding-bottom:12px; margin-bottom:20px;">
-          <span>📅 2026-09-08（今日）</span>
-          <span>📖 閱讀約 5 分鐘</span>
-          <span>🏷️ 角色定位</span>
-        </div>
-        <h3>🎴 貓咪稀有度全解析 — 普通到傳說，哪些值得抽、哪些值得練</h3>
+        <h3>🎴 貓咪稀有度全解析 — 普通到傳說</h3>
         <p>從低到高分別是：普通、特別（EX）、稀有、激稀有、超激稀有、傳說稀有。稀有度不完全等於強度——關鍵是「定位」。</p>
         <div class="highlight-box"><strong>💡 一句話原則：</strong> 低稀有負責「站樁與量產」，高稀有負責「解場與輸出」。</div>
         <div class="rarity-grid">
-          <div class="rarity-item" style="border-left-color:#9E9E9E;"><span class="r-level normal">普通</span><div class="r-name">🟤 普通貓 — 永遠的地基</div><div class="r-desc">開場就有、成本最低，基本貓真形態後 CP 值高得驚人。</div></div>
-          <div class="rarity-item" style="border-left-color:#4CAF50;"><span class="r-level ex">特別（EX）</span><div class="r-name">🟢 特別貓 — 活動與合作主力</div><div class="r-desc">來自合作活動或特殊關卡，確認是泛用型再投入資源。</div></div>
-          <div class="rarity-item" style="border-left-color:#2196F3;"><span class="r-level rare">稀有</span><div class="r-name">🔵 稀有貓 — 最被低估的性價比</div><div class="r-desc">大量實用的功能角，範圍攻擊、擊退、減速、對屬性特化。</div></div>
-          <div class="rarity-item" style="border-left-color:#9C27B0;"><span class="r-level super">激稀有</span><div class="r-name">🟣 激稀有 — 中流砥柱</div><div class="r-desc">大狂亂系列公認的中前期神器，練起來直接扛半個遊戲。</div></div>
-          <div class="rarity-item" style="border-left-color:#FF6B00;"><span class="r-level ultra">超激稀有</span><div class="r-name">🟠 超激稀有 — 轉蛋的主角</div><div class="r-desc">「一隻改變戰局」的角色都在這一級，也是最花錢花時間的地方。</div></div>
-          <div class="rarity-item" style="border-left-color:#FFD700;"><span class="r-level legend">傳說稀有</span><div class="r-name">🌟 傳說稀有 — 金字塔頂端</div><div class="r-desc">出場率極低、強度頂尖，「靠自己抽到指定傳說」很不切實際。</div></div>
+          <div class="rarity-item" style="border-left-color:#9E9E9E;"><span class="r-level normal">普通</span><div class="r-name">🟤 普通貓 — 永遠的地基</div></div>
+          <div class="rarity-item" style="border-left-color:#4CAF50;"><span class="r-level ex">特別（EX）</span><div class="r-name">🟢 特別貓 — 活動與合作主力</div></div>
+          <div class="rarity-item" style="border-left-color:#2196F3;"><span class="r-level rare">稀有</span><div class="r-name">🔵 稀有貓 — 最被低估的性價比</div></div>
+          <div class="rarity-item" style="border-left-color:#9C27B0;"><span class="r-level super">激稀有</span><div class="r-name">🟣 激稀有 — 中流砥柱</div></div>
+          <div class="rarity-item" style="border-left-color:#FF6B00;"><span class="r-level ultra">超激稀有</span><div class="r-name">🟠 超激稀有 — 轉蛋的主角</div></div>
+          <div class="rarity-item" style="border-left-color:#FFD700;"><span class="r-level legend">傳說稀有</span><div class="r-name">🌟 傳說稀有 — 金字塔頂端</div></div>
         </div>
         <div class="service-reminder">
           <p style="font-size:1.1rem; font-weight:700;">藍眼、傳說、鬼滅、EV 福音…</p>
-          <p style="font-size:0.9rem; opacity:0.8;">想要的系列直接打包取得，不用賭轉蛋</p>
-          <a href="https://wa.me/601172833280?text=您好！我想咨询【系列打包】" target="_blank" class="btn btn-wa" style="font-size:1rem; padding:10px 30px;">💬 立即諮詢</a>
+          <p style="font-size:0.9rem; opacity:0.8;">想要的系列直接打包取得</p>
+          <a href="https://wa.me/601172833280?text=您好！我想咨询【系列打包】" target="_blank" class="btn btn-wa">💬 立即諮詢</a>
         </div>
       </div>
     </div>
-
   </div>
-
-  <!-- ================================================================
-       页面3：资源导航
-       ================================================================ -->
-  <div class="page" id="page-resource">
-
-    <div style="background:white; border-radius:20px; padding:25px 20px; box-shadow:var(--card-shadow); margin-bottom:25px; text-align:center; border-bottom:5px solid var(--orange);">
-      <h2 style="font-size:1.8rem; color:var(--dark);">📚 实用资源 <span style="color:var(--orange);">导航</span></h2>
-      <p style="color:#666; margin-top:8px; font-size:1rem;">精选最实用的猫咪大战争攻略网站 · 查角色 · 找数据 · 看攻略</p>
+  <!-- ===== 文章4：帳號轉移教學 ===== -->
+<div class="article-content" id="article-transfer">
+  <div class="guide-body">
+    <div style="display:flex; gap:15px; flex-wrap:wrap; font-size:0.85rem; color:#888; border-bottom:1px solid #eee; padding-bottom:12px; margin-bottom:20px;">
+      <span>📅 2026-09-10（今日）</span>
+      <span>📖 閱讀約 3 分鐘</span>
+      <span>🏷️ 帳號安全</span>
     </div>
 
-    <div class="resource-grid">
-      <!-- 1. 猫咪搜寻 -->
-      <div class="resource-card">
-        <div class="icon">🔍</div>
-        <h3>貓咪搜尋</h3>
-        <div class="desc">強大的猫咪数据查询工具，可篩選能力、效果、抗性、耐性。支援 ID、等級、射程、DPS 等多種排序方式，快速找到你要的角色資訊。</div>
-        <div class="tags"><span class="hot">🔥 最實用</span><span class="recommend">⭐ 推薦</span><span class="free">🆓 免費</span></div>
-        <a href="https://reurl.cc/YDrWdD" target="_blank" class="btn-visit">🔗 前往查詢 ＞＞＞</a>
-      </div>
+    <h3>🔄 帳號轉移教學 — 決定好要什麼之後，照以下方式傳給我</h3>
+    <p>為了確保您的帳號安全，轉移過程需要您配合幾個簡單步驟。請仔細閱讀以下說明，並觀看教學影片。</p>
 
-      <!-- 2. 官方图鉴 -->
-      <div class="resource-card">
-        <div class="icon">📘</div>
-        <h3>官方圖鑑 (PONOS)</h3>
-        <div class="desc">官方出品，資訊最權威。可按稀有度、攻擊對象、效果篩選，查看詳細技能說明、數值與進化型態。</div>
-        <div class="tags"><span class="recommend">⭐ 推薦</span><span>官方</span><span>繁中</span></div>
-        <a href="https://battlecats.ponos.com.tw/" target="_blank" class="btn-visit">🔗 前往官網 ＞＞＞</a>
-      </div>
-
-      <!-- 3. Wiki -->
-      <div class="resource-card">
-        <div class="icon">🌍</div>
-        <h3>Battle Cats Wiki</h3>
-        <div class="desc">全球最完整的猫咪大战争資料庫，包含猫咪、敵人、關卡、活動等詳細數據，適合深度研究與進階玩家。</div>
-        <div class="tags"><span>英文</span><span>最完整</span></div>
-        <a href="https://battle-cats.fandom.com/wiki/The_Battle_Cats_Wiki" target="_blank" class="btn-visit orange">🔗 前往Wiki ＞＞＞</a>
-      </div>
-
-      <!-- 4. 攻略网 -->
-      <div class="resource-card">
-        <div class="icon">⚔️</div>
-        <h3>貓咪大戰爭 攻略網</h3>
-        <div class="desc">針對「卡關、缺對策、查角色」設計的攻略網站，收錄關卡攻略、角色評價、隊伍配置建議，非常適合新手解決問題。</div>
-        <div class="tags"><span class="recommend">⭐ 推薦</span><span>繁中</span><span>新手向</span></div>
-        <a href="https://battlecats.anypupil.com/" target="_blank" class="btn-visit">🔗 前往攻略 ＞＞＞</a>
-      </div>
-
-      <!-- 5. game8 -->
-      <div class="resource-card">
-        <div class="icon">🇯🇵</div>
-        <h3>game8 攻略站</h3>
-        <div class="desc">日本最大手遊攻略站之一，更新速度快，有詳細的角色排名、射程/跑速表格、最新活動攻略。</div>
-        <div class="tags"><span>日文</span><span>更新快</span></div>
-        <a href="https://game8.jp/battlecats" target="_blank" class="btn-visit orange">🔗 前往game8 ＞＞＞</a>
-      </div>
-
-      <!-- 6. YouTube -->
-      <div class="resource-card">
-        <div class="icon">🎬</div>
-        <h3>YouTube 攻略影片</h3>
-        <div class="desc">搜尋「貓咪大戰爭 攻略」或「Battle Cats Guide」，可找到大量關卡實戰、角色測試、抽卡建議的影片教學。</div>
-        <div class="tags"><span>影片</span><span>實戰</span></div>
-        <a href="https://www.youtube.com/results?search_query=%E8%B2%93%E5%92%AA%E5%A4%A7%E6%88%B0%E7%88%AD+%E6%94%BB%E7%95%A5" target="_blank" class="btn-visit">🔗 搜尋影片 ＞＞＞</a>
-      </div>
+    <div class="highlight-box">
+      <strong>⚠️ 重要提醒：</strong> 產生轉移帳密後，<strong>畫面請停留著，不要按「結束遊戲」</strong>，否則我將無法登入您的帳號。
     </div>
 
-    <div class="tips-box">
-      <h3>💡 使用小提醒</h3>
-      <ul>
-        <li><strong>貓咪搜尋</strong> 是最強大的數據查詢工具，輸入名稱或 ID 就能快速找到角色數值。</li>
-        <li>查角色請優先使用 <strong>官方圖鑑</strong> 或 <strong>貓咪搜尋</strong>，數據最準確。</li>
-        <li>想看關卡攻略或隊伍配置，推薦 <strong>攻略網</strong> 或 <strong>YouTube</strong>。</li>
-        <li>所有資源均為 <strong>免費公開</strong>，無需登入即可使用。</li>
-      </ul>
+    <h4>📤 第一步：轉移帳號給我的方式</h4>
+    <div class="step-list" style="counter-reset: step;">
+      <li>選項 → <strong>機種變更</strong></li>
+      <li>點選 <strong>開始機種轉移手續</strong></li>
+      <li>把產生的<strong>轉移帳密截圖</strong>給我</li>
+      <li><strong>畫面停留著，不要按「結束遊戲」</strong>（按了我就無法登入）</li>
     </div>
 
-  </div>
+    <h4>📥 第二步：登入回去的方式</h4>
+    <div class="step-list" style="counter-reset: step;">
+      <li>等我完成後，會發給您<strong>新的轉移帳密</strong></li>
+      <li>您再點 <strong>「結束遊戲」→「終止機種轉移」</strong></li>
+      <li>這時會回到初始畫面</li>
+      <li>點 <strong>選項 → 機種變更 → 開始資料繼承</strong></li>
+      <li>輸入我傳的<strong>轉移帳密</strong>就可登入回去囉</li>
+    </div>
 
-  <!-- ===== 页脚 ===== -->
-  <div class="footer">
-    <p>🐾 本店所有商品均提供售后服务与安全保障</p>
-    <p>📞 <a href="https://wa.me/601172833280">WhatsApp: 011-7283 3280</a> &nbsp;|&nbsp; 
-       <a href="https://www.tiktok.com/@battlecatstore" target="_blank">TikTok @battlecatstore</a></p>
+    <div class="tip-box">
+      <strong>💡 小提醒：</strong> 整個過程約 5-10 分鐘，請保持網路穩定。如有任何問題，隨時透過 WhatsApp 聯繫我。
+    </div>
+
+    <h4>🎬 影片教學</h4>
+    <div style="text-align:center; margin:20px 0;">
+      <a href="https://www.tiktok.com/@battlecatstore/video/7467759096188456199" target="_blank" class="btn btn-orange" style="font-size:1rem; padding:12px 30px; display:inline-flex; border-radius:50px; font-weight:700;">
+        📺 觀看轉移教學影片 ＞＞＞
+      </a>
+      <p style="font-size:0.8rem; color:#888; margin-top:8px;">👉 如無法播放，請複製連結至瀏覽器開啟</p>
+    </div>
+
+    <div class="service-reminder">
+      <p style="font-size:1rem; font-weight:700;">有任何問題？</p>
+      <p style="font-size:0.9rem; opacity:0.8;">隨時聯繫我，我會一步步帶您完成</p>
+      <a href="https://wa.me/601172833280?text=您好！我想咨询【帳號轉移】" target="_blank" class="btn btn-wa" style="font-size:1rem; padding:10px 30px;">💬 聯繫客服</a>
+    </div>
   </div>
 </div>
 
-<script>
-  // ================================================================
-  // WhatsApp 跳转函数（自动发送注册奖品消息）
-  // ================================================================
+  <div class="page" id="page-resource">
+    <div style="background:white; border-radius:20px; padding:25px 20px; box-shadow:var(--card-shadow); margin-bottom:25px; text-align:center; border-bottom:5px solid var(--orange);">
+      <h2 style="font-size:1.8rem; color:var(--dark);">📚 实用资源 <span style="color:var(--orange);">导航</span></h2>
+      <p style="color:#666; margin-top:8px; font-size:1rem;">精选最实用的猫咪大战争攻略网站</p>
+    </div>
+    <div class="resource-grid">
+      <div class="resource-card">
+        <div class="icon">🔍</div>
+        <h3>貓咪搜尋</h3>
+        <div class="desc">強大的猫咪数据查询工具，可篩選能力、效果、抗性、耐性。</div>
+        <div class="tags"><span class="hot">🔥 最實用</span><span class="recommend">⭐ 推薦</span><span class="free">🆓 免費</span></div>
+        <a href="https://reurl.cc/YDrWdD" target="_blank" class="btn-visit">🔗 前往查詢 ＞＞＞</a>
+      </div>
+      <div class="resource-card">
+        <div class="icon">📘</div>
+        <h3>官方圖鑑 (PONOS)</h3>
+        <div class="desc">官方出品，資訊最權威。可按稀有度、攻擊對象、效果篩選。</div>
+        <div class="tags"><span class="recommend">⭐ 推薦</span><span>官方</span><span>繁中</span></div>
+        <a href="https://battlecats.ponos.com.tw/" target="_blank" class="btn-visit">🔗 前往官網 ＞＞＞</a>
+      </div>
+      <div class="resource-card">
+        <div class="icon">🌍</div>
+        <h3>Battle Cats Wiki</h3>
+        <div class="desc">全球最完整的猫咪大战争資料庫，適合深度研究與進階玩家。</div>
+        <div class="tags"><span>英文</span><span>最完整</span></div>
+        <a href="https://battle-cats.fandom.com/wiki/The_Battle_Cats_Wiki" target="_blank" class="btn-visit orange">🔗 前往Wiki ＞＞＞</a>
+      </div>
+      <div class="resource-card">
+        <div class="icon">⚔️</div>
+        <h3>貓咪大戰爭 攻略網</h3>
+        <div class="desc">針對「卡關、缺對策、查角色」設計的攻略網站，非常適合新手。</div>
+        <div class="tags"><span class="recommend">⭐ 推薦</span><span>繁中</span><span>新手向</span></div>
+        <a href="https://battlecats.anypupil.com/" target="_blank" class="btn-visit">🔗 前往攻略 ＞＞＞</a>
+      </div>
+    </div>
+    <div class="tips-box">
+      <h3>💡 使用小提醒</h3>
+      <ul>
+        <li><strong>貓咪搜尋</strong> 是最強大的數據查詢工具。</li>
+        <li>查角色請優先使用 <strong>官方圖鑑</strong> 或 <strong>貓咪搜尋</strong>。</li>
+        <li>所有資源均為 <strong>免費公開</strong>。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>🐾 本店所有商品均提供售后服务与安全保障</p>
+    <p>📞 <a href="https://wa.me/601172833280">WhatsApp: 011-7283 3280</a></p>
+  </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <h3>🛒 购物车</h3>
+    <button class="close-cart" onclick="closeCart()">✕</button>
+  </div>
+  <div id="cartItems"></div>
+  <div class="cart-total" id="cartTotal" style="display:none;">
+    <span class="ct-label">总价</span>
+    <span class="ct-price" id="cartTotalPrice">RM 0</span>
+  </div>
+  <button class="btn-checkout" id="checkoutBtn" onclick="checkout()" disabled>💬 跳转 WhatsApp 结算</button>
+</div>
+
+<button class="floating-cart" onclick="openCart()">
+  🛒 <span class="fc-count" id="floatCartCount">0</span>
+          </button>
+          <script>
   function goToRegister() {
     const phone = '601172833280';
     const message = '我想要获得登入奖品（150猫罐头 + 500万经验）';
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
   }
 
-  // ================================================================
-  // 页面切换（商店 / 攻略站 / 资源）
-  // ================================================================
   function switchPage(page) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-' + page).classList.add('active');
@@ -751,33 +990,26 @@
     });
   }
 
-  // ================================================================
-  // 文章切换
-  // ================================================================
   function switchArticle(article) {
-    document.querySelectorAll('.article-content').forEach(a => a.classList.remove('active'));
-    document.getElementById('article-' + article).classList.add('active');
-    document.querySelectorAll('.art-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.art-btn').forEach(b => {
-      if (b.textContent.includes(
-        article === 'facility' ? '設施' :
-        article === 'rank' ? '必練' : '稀有度'
-      )) {
-        b.classList.add('active');
-      }
-    });
-  }
+  document.querySelectorAll('.article-content').forEach(a => a.classList.remove('active'));
+  document.getElementById('article-' + article).classList.add('active');
+  document.querySelectorAll('.art-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.art-btn').forEach(b => {
+    const text = b.textContent;
+    if (article === 'facility' && text.includes('設施')) b.classList.add('active');
+    else if (article === 'rank' && text.includes('必練')) b.classList.add('active');
+    else if (article === 'rarity' && text.includes('稀有度')) b.classList.add('active');
+    else if (article === 'transfer' && text.includes('轉移')) b.classList.add('active');
+  });
+            }
 
-  // ================================================================
-  // 商品数据
-  // ================================================================
   const accountData = [
-    { name: '普通初始号 ★★★☆☆', price: 'RM 10', tags: ['新手入门', '超值'], desc: '【二选一配置】\n① 全部牌库：全图鉴包含合作\n② 只留初始小猫（非超硬核玩家不推荐）', features: 'XP: 1亿 | 道具: 150(每个) | 统率: 200 | 银券: 50 | 福券: 500', badge: 'badge-green' },
-    { name: '标准初始号 ★★★★☆', price: 'RM 25', tags: ['进阶', '自选'], desc: '【二选一配置】\n① 全部牌库：全图鉴包含合作\n② 自选单系列：任选一组单件+合作系列\n（常驻:黑白蓝眼/小精灵等 | 合作:EVA/FATE/初音/剑心等）', features: 'XP: 1亿 | 道具: 500(每个) | 统率: 500 | 银券: 500 | 福券: 400', badge: 'badge-blue' },
-    { name: '黄金精英号 ★☆☆☆☆', price: 'RM 30', tags: ['全猫满级', '全宝箱'], desc: '全猫解锁: 全图鉴包含合作 | 全猫满级: 等级附加满MAX\n全猫顶阶: 全最终阶(含最新四阶) | 进度宝箱: 宇宙宝箱/银券4星\n加码多多: 探险/神社满MAX + 10彩信 | 更新售后: 免费更新补给', features: 'XP: 1亿 | 道具/统率牌/喵力达/素材: 各1500 | NP: 1万', badge: 'badge-orange' },
-    { name: '豪华初始号 ★★★★★', price: 'RM 35', tags: ['资源丰富', '自选8猫'], desc: '【二选一配置】① 全部牌库 ② 自选单系列\n【三选一配置】① 进度宝箱(世界/未来/宇宙1-3) ② 自选8只猫(全猫则换300统率)', features: 'XP: 1亿 | 道具: 800(每个) | 统率牌: 500 | 银券: 500 | 福券: 400 | NP本能币: 8000 | 喵力达/猫眼石/城堡素材: 各800 | 种子/兽石/兽石结晶: 各120', badge: 'badge-blue' },
-    { name: '顶配初始号 ★★★★★', price: 'RM 45', tags: ['顶配', '三选一'], desc: '【三选一】① 全部猫咪(全图鉴) ② 全部合作(300只) ③ 全部超激(300只)\n【额外赠送】自选非初始进度(世界/未来/宇宙1-3) + 享猫粮优惠 + 包后续期角色更新', features: 'XP: 1亿 | 超级道具/统率牌/喵力达/猫眼石/素材: 各1200 | 银券: 1000 | 福券: 600 | 种子/兽石: 各240 | NP: 12000', badge: 'badge-orange' },
-    { name: '🏆 猫神至尊号 ★★★★★', price: 'RM 85', tags: ['终极完美', '永久更新'], desc: '全猫/图鉴: 全图鉴包含合作 + 全猫人图鉴\n满级顶阶: 全猫满级MAX(可下调) + 全四阶顶阶\n进度宝箱: 全宝箱 + 魔界全猫 + 真传4星(可调图)\n加码/喵星: 探险神社MAX+10彩信 | 属性地标/基地/饰品全MAX\n本店独家: 全猫本能/超本能解锁满级 + 十八次强力猫队\n全猫解锁: 魔界/不死/发想地标最高阶/收藏奖章全满', features: 'XP: 1亿 | 超级道具/统率牌/喵力达/猫眼石/素材: 各3000 | 银券: 1000 | 种子/兽石/兽石结晶: 各1000 | 本能币: 1万 | S级本能珠: 各200(包后续新版珠珠)', badge: 'badge-orange', hot: true },
+    { name: '普通初始号 ★★★☆☆', price: 'RM 10', tags: ['新手入门', '超值'], desc: '【二选一配置】\n① 全部牌库：全图鉴包含合作\n② 只留初始小猫', features: 'XP: 1亿 | 道具: 150(每个) | 统率: 200 | 银券: 50 | 福券: 500', badge: 'badge-green' },
+    { name: '标准初始号 ★★★★☆', price: 'RM 25', tags: ['进阶', '自选'], desc: '【二选一配置】\n① 全部牌库：全图鉴包含合作\n② 自选单系列', features: 'XP: 1亿 | 道具: 500(每个) | 统率: 500 | 银券: 500', badge: 'badge-blue' },
+    { name: '黄金精英号 ★☆☆☆☆', price: 'RM 30', tags: ['全猫满级', '全宝箱'], desc: '全猫解锁+满级 | 全最终四阶 | 宇宙宝箱/银券4星', features: 'XP: 1亿 | 道具/统率牌: 各1500 | NP: 1万', badge: 'badge-orange' },
+    { name: '豪华初始号 ★★★★★', price: 'RM 35', tags: ['资源丰富', '自选8猫'], desc: '① 全部牌库 ② 自选单系列\n① 进度宝箱 ② 自选8只猫', features: 'XP: 1亿 | 道具: 800 | 统率: 500 | NP: 8000 | 喵力达/猫眼石: 各800', badge: 'badge-blue' },
+    { name: '顶配初始号 ★★★★★', price: 'RM 45', tags: ['顶配', '三选一'], desc: '【三选一】① 全部猫咪 ② 全部合作 ③ 全部超激\n+ 自选进度 + 包后续', features: 'XP: 1亿 | 超级道具: 各1200 | 银券: 1000 | NP: 12000', badge: 'badge-orange' },
+    { name: '🏆 猫神至尊号 ★★★★★', price: 'RM 85', tags: ['终极完美', '永久更新'], desc: '全猫满级四阶 | 全本能解锁 | 全宝箱+真传4星\n永久免费后续版本更新', features: 'XP: 1亿 | 超级道具: 各3000 | 银券: 1000 | 本能币: 1万 | S级本能珠: 各200', badge: 'badge-orange', hot: true },
   ];
 
   const rankData = [
@@ -801,17 +1033,192 @@
     { name: '魔界篇挑战全通', price: 'RM 15', desc: '魔界全通' },
     { name: '城堡炮塔+饰品MAX', price: 'RM 15', desc: '含后续更新' },
     { name: '全属性S级本能珠', price: 'RM 15', desc: '各10个' },
-    { name: '单属性S级本能珠', price: 'RM 10', desc: '各15个' },
     { name: '探险MAX', price: 'RM 10', desc: '探险满级' },
     { name: '神社MAX', price: 'RM 10', desc: '神社满级' },
     { name: '彩帽10名', price: 'RM 10', desc: '彩帽10名' },
-    { name: '基础资源 (每项)', price: 'RM 10', desc: '统率旗/道具/银券/猫罐头/XP等' },
-    { name: '稀有资源 (每项)', price: 'RM 15', desc: '白金券 / 传说卷' },
   ];
 
-  // ================================================================
-  // 渲染
-  // ================================================================
+  const resourceSections = {
+    points: {
+      title: '💰 资源点数',
+      items: [
+        { id: 'p1', name: '貓罐頭', unit: 6500, unitLabel: '个', price: 10 },
+        { id: 'p2', name: '首領旗', unit: 300, unitLabel: '个', price: 10 },
+        { id: 'p3', name: '本能點數 NP', unit: 2000, unitLabel: '点', price: 10 },
+        { id: 'p4', name: '經驗值 XP', unit: 5000, unitLabel: '万', price: 10 },
+      ]
+    },
+    tickets: {
+      title: '🎫 转蛋票券',
+      items: [
+        { id: 't1', name: '銀票', unit: 200, unitLabel: '张', price: 10 },
+        { id: 't2', name: '金票', unit: 100, unitLabel: '张', price: 10 },
+        { id: 't3', name: '招福轉蛋券', unit: 200, unitLabel: '张', price: 10, icon: '🎁' },
+        { id: 't4', name: '招福轉蛋G券', unit: 300, unitLabel: '张', price: 10, icon: '🎁' },
+      ]
+    },
+    materials: {
+      title: '🧪 道具・素材',
+      items: [
+        { id: 'm1', name: '戰鬥道具', unit: 500, unitLabel: '各', price: 10 },
+        { id: 'm2', name: '喵力達', unit: 300, unitLabel: '各', price: 10 },
+        { id: 'm3', name: '貓眼石', unit: 300, unitLabel: '各', price: 10 },
+        { id: 'm4', name: '全色薄荷＋種子', unit: 50, unitLabel: '各', price: 10 },
+        { id: 'm5', name: '全色獸石＋結晶', unit: 50, unitLabel: '各', price: 10 },
+        { id: 'm6', name: '城堡建築素材', unit: 350, unitLabel: '各', price: 10 },
+        { id: 'm7', name: '城堡改造素材', unit: 350, unitLabel: '各', price: 10 },
+        { id: 'm8', name: '62種S級本能珠', unit: 30, unitLabel: '各', price: 10 },
+      ]
+    },
+    special: {
+      title: '💎 特殊资源',
+      items: [
+        { id: 's1', name: '白金票', unit: 5, unitLabel: '张', price: 15 },
+        { id: 's2', name: '傳說票', unit: 5, unitLabel: '张', price: 15 },
+      ]
+    }
+  };
+
+  let cart = [];
+
+  function addToCart(itemId, name, unit, unitLabel, price) {
+    const existing = cart.find(c => c.id === itemId);
+    if (existing) {
+      existing.qty += 1;
+    } else {
+      cart.push({ id: itemId, name, unit, unitLabel, price, qty: 1 });
+    }
+    updateCartUI();
+    showToast(`已加入：${name}`);
+  }
+
+  function removeFromCart(itemId) {
+    cart = cart.filter(c => c.id !== itemId);
+    updateCartUI();
+  }
+
+  function updateCartUI() {
+    const count = cart.reduce((sum, c) => sum + c.qty, 0);
+    document.getElementById('headerCartCount').textContent = count;
+    document.getElementById('floatCartCount').textContent = count;
+    renderCartItems();
+  }
+
+  function renderCartItems() {
+    const container = document.getElementById('cartItems');
+    const totalEl = document.getElementById('cartTotal');
+    const totalPriceEl = document.getElementById('cartTotalPrice');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+
+    if (cart.length === 0) {
+      container.innerHTML = '<div class="cart-empty">🛒 购物车是空的<br><span style="font-size:0.8rem;">去选购一些资源吧！</span></div>';
+      totalEl.style.display = 'none';
+      checkoutBtn.disabled = true;
+      return;
+    }
+
+    let total = 0;
+    container.innerHTML = cart.map(item => {
+      const subtotal = item.price * item.qty;
+      total += subtotal;
+      const totalUnits = item.unit * item.qty;
+      return `
+        <div class="cart-item">
+          <div class="ci-name">${item.name}<br><span class="ci-qty">${item.unit}${item.unitLabel} × ${item.qty}份 = ${totalUnits}${item.unitLabel}</span></div>
+          <div class="ci-price">RM ${subtotal}</div>
+          <button class="ci-remove" onclick="removeFromCart('${item.id}')">✕</button>
+        </div>
+      `;
+    }).join('');
+
+    totalEl.style.display = 'flex';
+    totalPriceEl.textContent = `RM ${total}`;
+    checkoutBtn.disabled = false;
+  }
+
+  function openCart() {
+    document.getElementById('cartPanel').classList.add('active');
+    document.getElementById('overlay').classList.add('active');
+  }
+
+  function closeCart() {
+    document.getElementById('cartPanel').classList.remove('active');
+    document.getElementById('overlay').classList.remove('active');
+  }
+
+  function checkout() {
+    if (cart.length === 0) return;
+    const phone = '601172833280';
+    let message = '您好！我想购买以下资源：\n\n';
+    let total = 0;
+    cart.forEach(item => {
+      const subtotal = item.price * item.qty;
+      total += subtotal;
+      const totalUnits = item.unit * item.qty;
+      message += `【${item.name}】${item.unit}${item.unitLabel} × ${item.qty}份 = ${totalUnits}${item.unitLabel}（RM ${subtotal}）\n`;
+    });
+    message += `\n总价：RM ${total}\n请提供更多详情，谢谢！`;
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+  }
+
+  function showToast(msg) {
+    const toast = document.createElement('div');
+    toast.textContent = msg;
+    toast.style.cssText = 'position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#25D366;color:white;padding:10px 24px;border-radius:50px;font-weight:700;font-size:0.85rem;z-index:9999;box-shadow:0 8px 25px rgba(0,0,0,0.2);';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 1500);
+  }
+              function renderResourceSections() {
+    for (const [key, section] of Object.entries(resourceSections)) {
+      const container = document.getElementById('section-' + key);
+      if (!container) continue;
+      container.innerHTML = section.items.map(item => `
+        <div class="item-row">
+          <div class="item-info">
+            <div class="item-name">${item.icon || ''} ${item.name}</div>
+            <div class="item-amount">${item.unit} ${item.unitLabel} / 份</div>
+          </div>
+          <div class="item-price">RM ${item.price} / 份</div>
+          <div class="item-actions">
+            <div class="qty-control">
+              <button onclick="adjustQty('${item.id}', -1)">−</button>
+              <input class="qty-num" id="qty-${item.id}" type="number" value="1" min="1" onchange="updateQty('${item.id}', this.value)">
+              <button onclick="adjustQty('${item.id}', 1)">＋</button>
+            </div>
+            <button class="btn-add-cart ${key === 'tickets' ? 'blue' : key === 'special' ? 'purple' : ''}" onclick="addToCartWithQty('${item.id}', '${item.name}', ${item.unit}, '${item.unitLabel}', ${item.price})">加入购物车</button>
+          </div>
+        </div>
+      `).join('');
+    }
+  }
+
+  function adjustQty(itemId, delta) {
+    const input = document.getElementById('qty-' + itemId);
+    let val = parseInt(input.value) || 1;
+    val = Math.max(1, val + delta);
+    input.value = val;
+  }
+
+  function updateQty(itemId, val) {
+    const input = document.getElementById('qty-' + itemId);
+    let v = parseInt(val) || 1;
+    if (v < 1) v = 1;
+    input.value = v;
+  }
+
+  function addToCartWithQty(itemId, name, unit, unitLabel, price) {
+    const qty = parseInt(document.getElementById('qty-' + itemId).value) || 1;
+    const existing = cart.find(c => c.id === itemId);
+    if (existing) {
+      existing.qty += qty;
+    } else {
+      cart.push({ id: itemId, name, unit, unitLabel, price, qty });
+    }
+    updateCartUI();
+    showToast(`已加入：${name} × ${qty}份`);
+    document.getElementById('qty-' + itemId).value = 1;
+  }
+
   function renderAccounts() {
     const container = document.getElementById('accountProducts');
     container.innerHTML = accountData.map(item => {
@@ -865,8 +1272,7 @@
   renderAccounts();
   renderRanks();
   renderServices();
+  renderResourceSections();
 </script>
 </body>
 </html>
-```
-
